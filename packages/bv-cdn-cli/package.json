@@ -1,11 +1,11 @@
 {
-  "name": "@bv/cdn-cli",
+  "name": "@bvjs/cdn-cli",
   "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "keywords": [
-    "@bv/bv-cdn-cli",
-    "@bv/bv-cil"
+    "@bvjs/bv-cdn-cli",
+    "@bvjs/bv-cil"
   ],
   "directories": {
     "lib": "lib"

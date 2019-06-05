@@ -1,12 +1,12 @@
 {
-  "name": "@bv/git-cli",
+  "name": "@bvjs/git-cli",
   "version": "0.0.8",
   "description": "git dowload",
   "main": "index.js",
   "keywords": [
-    "@bv/bv-git-cli",
+    "@bvjs/bv-git-cli",
     "nodegit",
-    "@bv/bv-cil"
+    "@bvjs/bv-cil"
   ],
   "directories": {
     "lib": "lib"
