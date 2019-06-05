@@ -1,0 +1,38 @@
+{
+  "name": "@bv/cdn-cli",
+  "version": "0.0.3",
+  "description": "",
+  "main": "index.js",
+  "keywords": [
+    "@bv/bv-cdn-cli",
+    "@bv/bv-cil"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "bv-cdn": "bin/bv-cdn",
+    "bv-cdn-init": "bin/bv-cdn-init",
+    "bv-cdn-upload": "bin/bv-cdn-upload"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bvjs/packages/bv-cdn-cli"
+  },
+  "homepage": "https://github.com/bvjs/bv/packages/bv-cdn-cli#readme",
+  "author": "雨后黄昏 <shihuajunze@163.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "fs": "^0.0.1-security",
+    "glob": "^7.1.4",
+    "inquirer": "^6.3.1",
+    "ora": "^3.4.0",
+    "path": "^0.12.7",
+    "qiniu": "^7.2.1"
+  }
+}

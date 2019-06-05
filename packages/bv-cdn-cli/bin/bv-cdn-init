@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const inquirer = require('inquirer')
+const glob = require('glob')
+const path = require('path')
+const fs = require('fs')
+const logger = require('../lib/logger')
+const configName = require('../lib/config').configName
+
+if (fs.existsSync(configName)) {
+  logger.error(configName + ' exists')
+}
+
+const templates = glob
+  .sync(path.resolve(__dirname, '../templates/**.config.js'))
+  .map(file => path.basename(file).replace(/\.config\.js/, ''))
+
+inquirer.prompt([{
+  type: 'list',
+  name: 'cdn',
+  message: 'Select CDN provider',
+  choices: templates,
+}]).then(answers => {
+  fs.copyFile(path.resolve(__dirname, `../templates/${answers.cdn}.config.js`), configName, err => {
+    if (err) {
+      logger.error(err)
+    }
+    logger.success(`create ${configName} success`)
+  })
+})
+

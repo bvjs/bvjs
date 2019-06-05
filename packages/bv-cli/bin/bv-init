@@ -1,0 +1,98 @@
+#!/usr/bin/env node
+const chalk = require('chalk')
+const program = require('commander')
+const exists = require('fs').existsSync
+const inquirer = require('inquirer')
+const path = require('path')
+const logger = require('../lib/logger')
+const config = require('../lib/config')
+const download = require('../lib/download')
+const getTemplateList = require('../lib/getTemplateList')
+const generate = require('../lib/generate')
+// 搜索类型，模糊搜索
+const fuzzy = require('fuzzy')
+const sep = chalk.gray(' - ')
+
+/**
+ * Usage.
+ */
+program.usage('[project-name]')
+
+
+/**
+ * Help.
+ */
+program.on('--help', () => {
+  console.log()
+  console.log('  Examples:')
+  console.log()
+  console.log(chalk.gray('    # generate a new project from a template'))
+  console.log('    $ bv init my-app')
+  console.log()
+}).parse(process.argv)
+
+/**
+ * 为了美观留白
+ */
+process.on('exit', () => {
+  console.log()
+})
+
+const destDirName = program.args[0]
+const clone = program.clone || false
+const inplace = !destDirName || destDirName === '.'
+const dest = path.resolve(destDirName || '.')
+
+// 如果目录已经存在
+if (exists(dest)) {
+  inquirer.prompt([{
+    type: 'confirm',
+    message: inplace
+      ? 'Generate project in current directory?'
+      : 'Target directory exists. Continue?',
+    name: 'ok'
+  }]).then(answers => {
+    if (answers.ok) {
+      Main()
+    }
+  }).catch(logger.fatal)
+} else {
+  Main()
+}
+
+/**
+ * Entry
+ */
+function Main() {
+  const templateList = getTemplateList()
+  inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
+  inquirer.prompt([{
+    type: 'autocomplete',
+    message: 'Select template:',
+    name: 'from',
+    pageSize: 10,
+    source: (answers, key = '') => {
+      return templateList.then(templates => {
+        const fuzzyResult = fuzzy.filter(key, templates.map(repo => repo.name + sep + repo.description))
+        return fuzzyResult.map(el => el.original)
+      })
+    },
+  }]).then(answers => {
+    const template = answers.from.split(sep)[0]
+    download(template, clone)
+      .then(() => {
+        // generate template
+        generate(destDirName, path.join(config.templateLocalPath, template), dest)
+          .then(data => {
+
+          })
+          .catch(err => {
+            console.log(11)
+            logger.error('Failed to generate ' + template + ': ' + err.message.trim())
+          })
+      })
+      .catch(err => {
+        logger.error('Failed to download ' + template + ': ' + err.message.trim())
+      })
+  })
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+/**
+ * 复制配置模板到当前目录
+ */
+const fs = require('fs')
+const path = require('path')
+const logger = require('../lib/logger')
+const configName = require('../lib/config').configName
+
+if (fs.existsSync(configName)) {
+  logger.error(configName + ' exists')
+}
+
+fs.copyFile(path.resolve(__dirname, '../templates/git.config.js'), configName, err => {
+  if (err) {
+    logger.error(err)
+  }
+  logger.success(`create ${configName} success`)
+})

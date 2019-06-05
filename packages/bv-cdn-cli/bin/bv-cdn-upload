@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+const chalk = require('chalk')
+const path = require('path')
+const glob = require("glob")
+const ora = require('ora')
+const fs = require('fs')
+const logger = require('../lib/logger')
+const configName = require('../lib/config').configName
+
+program.parse(process.argv)
+
+const configPath = path.resolve(program.args[0] || configName)
+// 配置文件不存在
+if (!fs.existsSync(configPath)) {
+  logger.error(`Not found ${configPath}, #run $ bv-cdn init`)
+}
+
+const config = require(configPath)
+const { cdn, glob: { pattern }, info = false } = config
+
+// cdn配置不存在
+if (!cdn) {
+  logger.error(`Config must have a 'cdn' attribute and can not be empty`)
+}
+
+// 要上传的文件不存在
+if (!pattern) {
+  logger.error(`Config must have a 'glob.pattern' attribute and can not be empty`)
+}
+
+// 不同cdn的上传api
+const upload = {
+  qiniu: require('../lib/qiniu')
+}[cdn]
+
+// 如果api不存在
+if (!upload) {
+  logger.error(`Not supported for ${cdn}`)
+}
+
+const uploadFile = upload(config)
+const files = glob.sync(pattern, { ...config.glob }).map(file => ({ file }))
+const filesLen = files.length
+let uploaded = 0
+let failed = 0
+
+if (!filesLen) {
+  logger.error(`No such file, check 'glob.pattern' attribute`)
+}
+
+const spinner = ora('').start()
+
+// 递归顺序上传
+const _upload = (index = 0) => {
+
+  if (index >= filesLen) {
+    if (info) {
+      console.log('')
+      console.table(files)
+    }
+    return spinner.succeed(`Uploading to ${cdn} CDN : ${(uploaded * 100 / filesLen).toFixed(2)}% ${uploaded} files uploaded, ${failed} files failed`)
+  }
+
+  const currentFile = files[index]
+  const { file } = currentFile
+  spinner.text = `[${index + 1}/${filesLen}] cdn uploading ${file}`
+  uploadFile(file.substring(1), file)
+    .then(() => {
+      ++uploaded
+    })
+    .catch(err => {
+      ++failed
+      currentFile.state = 'failed'
+      console.log('')
+      logger.error(err)
+    })
+    .finally(() => {
+      _upload(++index)
+    })
+}
+
+_upload()

@@ -1,0 +1,70 @@
+#!/usr/bin/env node
+
+/**
+ * git clone
+ */
+
+const path = require("path")
+const ora = require('ora')
+const rimraf = require('rimraf')
+const fs = require('fs')
+const program = require('commander')
+const configName = require('../lib/config').configName
+const clone = require('../lib/clone')
+const logger = require('../lib/logger')
+
+program.parse(process.argv)
+
+const configPath = path.resolve(program.args[0] || configName)
+
+if (!fs.existsSync(configPath)) {
+  logger.error(`Not found ${configPath}, #run $ bv-git init`)
+}
+
+const { repos, output, info = false, clean = false } = require(configPath)
+
+if (!repos.length) {
+  logger.error(`No such project, check 'repos' attribute`)
+}
+
+const reposLen = repos.length
+let cloned = 0
+let failed = 0
+const spinner = ora('').start()
+
+// 递归顺序clone
+const _clone = (index = 0) => {
+
+  if (index >= reposLen) {
+    if (info) {
+      console.log('')
+      console.table(repos)
+    }
+    return spinner.succeed(`git clone : ${(cloned * 100 / reposLen).toFixed(2)}% ${cloned} projects cloned, ${failed} projects failed`)
+  }
+
+  const repo = repos[index]
+  const { url, branch } = repo
+  const repoDir = path.basename(url).replace(/\.git/, '')
+  const repoOutput = path.resolve(output, repoDir)
+  spinner.text = `[${index + 1}/${reposLen}] git clone ${url}`
+
+  if (clean) {
+    rimraf(repoOutput, {}, logger.error)
+  }
+
+  clone(url, repoOutput, null, branch)
+    .then(() => {
+      ++cloned
+    })
+    .catch(err => {
+      ++failed
+      repo.state = 'failed'
+      console.log('')
+      logger.error(err)
+    })
+    .finally(() => {
+      _clone(++index)
+    })
+}
+_clone()

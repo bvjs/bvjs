@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const getTemplateList = require('../lib/getTemplateList')()
+const chalk = require('chalk')
+const sep = chalk.gray(' - ')
+/**
+ * 为了美观留白
+ */
+// 开始一个空行
+// 当进程要结束时在打印一个空行
+process.on('exit', () => {
+  console.log()
+})
+
+/**
+ * 获取可用模板列表
+ */
+getTemplateList.then(templates => {
+  console.log('Available official templates:')
+  console.log()
+  templates.forEach(repo => {
+    console.log(chalk.yellow('★'), chalk.blue(repo.name), sep, repo.description)
+  })
+})

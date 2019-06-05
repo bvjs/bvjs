@@ -1,0 +1,33 @@
+{
+  "name": "@bv/stylelint-config",
+  "version": "0.0.5",
+  "description": "styleLint config",
+  "main": "index.js",
+  "keywords": [
+    "stylelint",
+    "stylelint-config",
+    "@bv/bv-cil",
+    "@bv/bv-eslint-config",
+    "@bv/bv-stylelint-config"
+  ],
+  "scripts": {
+    "lint": "stylelint --fix \"./test/**/*.scss\" --config \"./index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bvjs/packages/bv-stylelint-config"
+  },
+  "homepage": "https://github.com/bvjs/bv/packages/bv-stylelint-config#readme",
+  "author": "雨后黄昏 <shihuajunze@163.com>",
+  "license": "ISC",
+  "peerDependencies": {
+    "stylelint": "^10.0.1"
+  },
+  "dependencies": {
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-scss": "^3.6.1"
+  },
+  "devDependencies": {
+    "stylelint": "^10.0.1"
+  }
+}
