@@ -15,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bvjs/packages/bv-stylelint-config"
+    "url": "https://github.com/bvjs/bvjs/tree/master/packages/bv-stylelint-config"
   },
-  "homepage": "https://github.com/bvjs/bv/packages/bv-stylelint-config#readme",
+  "homepage": "https://github.com/bvjs/bvjs/tree/master/packages/bv-stylelint-config#readme",
   "author": "雨后黄昏 <shihuajunze@163.com>",
   "license": "ISC",
   "peerDependencies": {

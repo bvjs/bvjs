@@ -1,5 +1,5 @@
 {
-  "name": "bv",
+  "name": "bvjs",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bvjs/bv.git"
+    "url": "git+https://github.com/bvjs/bvjs.git"
   },
   "author": "雨后黄昏 <shihuajunze@163.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bvjs/bv/issues"
+    "url": "https://github.com/bvjs/bvjs/issues"
   },
-  "homepage": "https://github.com/bvjs/bv#readme"
+  "homepage": "https://github.com/bvjs/bvjs#readme"
 }

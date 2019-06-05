@@ -20,9 +20,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bvjs/packages/bv-cdn-cli"
+    "url": "https://github.com/bvjs/bvjs/tree/master/packages/bv-cdn-cli"
   },
-  "homepage": "https://github.com/bvjs/bv/packages/bv-cdn-cli#readme",
+  "homepage": "https://github.com/bvjs/bvjs/tree/master/packages/bv-cdn-cli#readme",
   "author": "雨后黄昏 <shihuajunze@163.com>",
   "license": "ISC",
   "dependencies": {

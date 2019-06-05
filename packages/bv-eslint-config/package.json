@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config-bv",
+  "name": "@bvjs/eslint-config",
   "version": "0.0.6",
   "description": "eslint config",
   "main": "index.js",
@@ -7,25 +7,22 @@
     "eslint",
     "eslint-config",
     "bv-cil",
-    "eslint-config-bv",
-    "stylelint-config-bv"
+    "@bvjs/bv-eslint-config",
+    "@bvjs/bv-stylelint-config"
   ],
   "scripts": {
     "lint": "eslint --fix \"./test/**/*.*\" --config \"./index.js\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bvjs/eslint-config-bv.git"
+    "url": "https://github.com/bvjs/bvjs/tree/master/packages/bv-eslint-config"
   },
+  "homepage": "https://github.com/bvjs/bvjs/tree/master/packages/bv-eslint-config#readme",
   "author": "雨后黄昏 <shihuajunze@163.com>",
   "license": "ISC",
   "peerDependencies": {
     "eslint": ">= 5"
   },
-  "bugs": {
-    "url": "https://github.com/bvjs/eslint-config-bv/issues"
-  },
-  "homepage": "https://github.com/bvjs/eslint-config-bv#readme",
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "eslint-plugin-babel": "^5.3.0",
@@ -33,7 +30,6 @@
     "eslint-plugin-react": "^7.13.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "requireindex": "^1.2.0"
+    "eslint": "^5.16.0"
   }
 }

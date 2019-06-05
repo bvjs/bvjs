@@ -17,9 +17,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bvjs/packages/bv-cli"
+    "url": "https://github.com/bvjs/bvjs/tree/master/packages/bv-cli"
   },
-  "homepage": "https://github.com/bvjs/bv/packages/bv-cli#readme",
+  "homepage": "https://github.com/bvjs/bvjs/tree/master/packages/bv-cli#readme",
   "author": "雨后黄昏 <shihuajunze@163.com>",
   "license": "ISC",
   "dependencies": {

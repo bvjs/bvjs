@@ -21,9 +21,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bvjs/packages/bv-git-cli"
+    "url": "https://github.com/bvjs/bvjs/tree/master/packages/bv-git-cli"
   },
-  "homepage": "https://github.com/bvjs/bv/packages/bv-git-cli#readme",
+  "homepage": "https://github.com/bvjs/bvjs/tree/master/packages/bv-git-cli#readme",
   "author": "雨后黄昏 <shihuajunze@163.com>",
   "license": "ISC",
   "dependencies": {
