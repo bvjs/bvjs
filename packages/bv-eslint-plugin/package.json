@@ -1,0 +1,34 @@
+{
+  "name": "@bv/eslint-plugin",
+  "version": "0.0.1",
+  "description": "test ?.",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvjs/eslint-plugin-bv.git"
+  },
+  "author": "雨后黄昏 <shihuajunze@163.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bvjs/eslint-plugin-bv/issues"
+  },
+  "homepage": "https://github.com/bvjs/eslint-plugin-bv#readme",
+  "dependencies": {
+    "requireindex": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
